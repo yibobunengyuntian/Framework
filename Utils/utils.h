@@ -44,6 +44,9 @@ public:
     static bool removeDir(const QString &path);
     //删除文件
     static bool removeFile(const QString &filePath);
+
+    //截屏
+    static QPixmap screenCapture();
 };
 
 #endif // UTILS_H

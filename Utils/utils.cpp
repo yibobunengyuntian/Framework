@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "screencapturewgt.h"
 
 Utils::Utils() {}
 
@@ -125,5 +126,16 @@ bool Utils::removeFile(const QString &filePath)
     }
     QFile file(filePath);
     return file.remove();
+}
+
+QPixmap Utils::screenCapture()
+{
+    QPixmap pix;
+    ScreenCaptureWgt w;
+    if(w.exec() == QDialog::Accepted)
+    {
+        pix = w.pixmap();
+    }
+    return pix;
 }
 
