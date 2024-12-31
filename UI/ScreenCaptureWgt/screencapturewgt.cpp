@@ -480,19 +480,11 @@ void ScreenCaptureWgt::mouseReleaseEvent(QMouseEvent *)
         m_status = NONE;
     }
     m_pMenu->show();
-    QPoint pos = scRect().bottomRight() + QPoint(-5, 10);
+    QPoint pos = scRect().bottomRight() + QPoint(-10, 10);
     pos.setX(pos.x() - m_pMenu->width());
     if(pos.x() < 5)
     {
-        pos.setX(5);
-    }
-    if(pos.x() > m_maxRect.width() - m_pMenu->width() - 5)
-    {
-        pos.setX(m_maxRect.width() - m_pMenu->width() - 5);
-    }
-    if(pos.y() < 5)
-    {
-        pos.setY(5);
+        pos.setX(scRect().topLeft().x() + 10);
     }
     if(pos.y() > m_maxRect.height() - m_pMenu->height() - 5)
     {
