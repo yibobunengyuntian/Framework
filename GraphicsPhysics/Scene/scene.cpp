@@ -40,10 +40,7 @@ ItemChain *Scene::CreateChan(const QList<QPointF> &points, b2BodyDef bd)
 
 void Scene::DestroyItem(ItemBase *item)
 {
-    m_items.removeOne(item);
-    QGraphicsScene::removeItem(item);
-    delete item;
-    item = nullptr;
+    m_destroyItems.append(item);
 }
 
 b2Joint *Scene::CreateJoint(const b2JointDef &def)
@@ -97,6 +94,18 @@ void Scene::onBeginContact(b2Contact* contact)
 
 void Scene::timerEvent(QTimerEvent *event)
 {
+    auto destroyItems = m_destroyItems;
+    for(auto item: destroyItems)
+    {
+        m_destroyItems.removeOne(item);
+        m_items.removeOne(item);
+        if(this->items().contains(item))
+        {
+            QGraphicsScene::removeItem(item);
+            delete item;
+        }
+    }
+
     if(m_isStop)
     {
         return;
@@ -112,6 +121,5 @@ void Scene::timerEvent(QTimerEvent *event)
 
 void Scene::clear()
 {
-    m_items.clear();
-    QGraphicsScene::clear();
+    m_destroyItems.append(this->items());
 }

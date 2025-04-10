@@ -4,6 +4,8 @@
 #include <QGraphicsScene>
 #include <QVector2D>
 #include <QElapsedTimer>
+#include <QFutureWatcher>
+#include <QtConcurrent>
 #include "box2d/box2d.h"
 #include "contactlistener.h"
 #include "itemcircle.h"
@@ -65,6 +67,8 @@ private:
     float m_fps = 60.0;
     int m_velocityIterations = 8; //这是速度迭代次数，用于解算速度约束（例如摩擦力和弹性）。增加迭代次数可以提高模拟的稳定性和准确性，但同样会增加计算量。
     int m_positionIterations = 3; //这是位置迭代次数，用于解算位置约束（例如刚体之间的接触）。增加迭代次数可以减少物体之间的穿透现象，但也会提高计算量。
+
+    QList<QGraphicsItem *> m_destroyItems;
 };
 
 #endif // SCENE_H

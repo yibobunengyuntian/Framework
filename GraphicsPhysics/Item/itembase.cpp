@@ -87,6 +87,11 @@ void ItemBase::setShowShape(const bool &is)
     m_isShowShape = is;
 }
 
+void ItemBase::setLinearVelocity(const QPointF &v)
+{
+    m_pBody->SetLinearVelocity(vector2DToVec2(QVector2D(v / Scene::m_pix_meter)));
+}
+
 void ItemBase::setUserData(const QVariant &data)
 {
     m_userData = data;

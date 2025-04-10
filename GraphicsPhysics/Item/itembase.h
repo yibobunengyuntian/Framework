@@ -23,6 +23,8 @@ public:
     void setShowBoundingRect(const bool &is = true);
     void setShowShape(const bool &is = true);
 
+    void setLinearVelocity(const QPointF& v);
+
     void setUserData(const QVariant &data);
     QVariant userData();
 
