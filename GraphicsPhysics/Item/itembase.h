@@ -24,6 +24,7 @@ public:
     void setShowShape(const bool &is = true);
 
     void setLinearVelocity(const QPointF& v);
+    QPointF linearVelocity();
 
     void setUserData(const QVariant &data);
     QVariant userData();
