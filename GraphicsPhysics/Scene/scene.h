@@ -3,9 +3,6 @@
 
 #include <QGraphicsScene>
 #include <QVector2D>
-#include <QElapsedTimer>
-#include <QFutureWatcher>
-#include <QtConcurrent>
 #include "box2d/box2d.h"
 #include "contactlistener.h"
 #include "itemcircle.h"
