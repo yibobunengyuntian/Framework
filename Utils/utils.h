@@ -45,6 +45,9 @@ public:
     //删除文件
     static bool removeFile(const QString &filePath);
 
+    //程序是否以管理员权限运行
+    static bool isRunningAsAdmin();
+
     //截屏
     static QPixmap screenCapture();
 };

@@ -1,6 +1,12 @@
 #include "utils.h"
 #include "screencapturewgt.h"
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#elif defined(Q_OS_UNIX)
+#include <unistd.h>
+#endif
+
 Utils::Utils() {}
 
 QVariantList Utils::readJson(const QString &path)
@@ -126,6 +132,36 @@ bool Utils::removeFile(const QString &filePath)
     }
     QFile file(filePath);
     return file.remove();
+}
+
+bool Utils::isRunningAsAdmin()
+{
+#ifdef Q_OS_WIN
+    BOOL isAdmin = FALSE;
+    PSID adminGroup;
+
+    SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
+    if (!AllocateAndInitializeSid(&NtAuthority, 2,
+                                  SECURITY_BUILTIN_DOMAIN_RID,
+                                  DOMAIN_ALIAS_RID_ADMINS,
+                                  0, 0, 0, 0, 0, 0,
+                                  &adminGroup))
+    {
+        return false;
+    }
+
+    if (!CheckTokenMembership(NULL, adminGroup, &isAdmin))
+    {
+        isAdmin = FALSE;
+    }
+
+    FreeSid(adminGroup);
+    return isAdmin == TRUE;
+#elif defined(Q_OS_UNIX)
+    return geteuid() == 0;
+#else
+    return false; // 未知平台默认返回false
+#endif
 }
 
 QPixmap Utils::screenCapture()
