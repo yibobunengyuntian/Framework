@@ -9,6 +9,8 @@ View::View(QWidget *parent)
 
     // 启用渲染抗锯齿
     this->setRenderHint(QPainter::Antialiasing);
+    // 启用平滑的像素图变换
+    this->setRenderHint(QPainter::SmoothPixmapTransform, true);
     // 文本抗锯齿
     this->setRenderHint(QPainter::TextAntialiasing);
 

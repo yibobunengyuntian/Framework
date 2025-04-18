@@ -97,16 +97,6 @@ QPointF ItemBase::linearVelocity()
     return vec2ToPoint(m_pBody->GetLinearVelocity()) * Scene::m_pix_meter;
 }
 
-void ItemBase::setUserData(const QVariant &data)
-{
-    m_userData = data;
-}
-
-QVariant ItemBase::userData()
-{
-    return m_userData;
-}
-
 void ItemBase::updateTransform()
 {
     QPointF pos = QPointF(m_pBody->GetPosition().x*Scene::m_pix_meter,m_pBody->GetPosition().y*Scene::m_pix_meter);
