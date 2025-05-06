@@ -9,6 +9,17 @@
 
 Utils::Utils() {}
 
+void Utils::loadStyle(const QString &styleFile)
+{
+    QFile file(styleFile);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QString styleSheet = QLatin1String(file.readAll());
+        file.close();
+        qApp->setStyleSheet(styleSheet);
+        qApp->processEvents();
+    }
+}
+
 QVariantList Utils::readJson(const QString &path)
 {
     QVariantList datas;

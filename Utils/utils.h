@@ -16,6 +16,9 @@ class Utils
 public:
     Utils();
 
+    //加载样式表
+    static void loadStyle(const QString & styleFile);
+
     //读取json
     static QVariantList readJson(const QString &path);
     //写入json
